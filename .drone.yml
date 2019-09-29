@@ -1,23 +1,24 @@
+clone:
+  git:
+    image: plugins/git
+    depth: 50
+    tags: true
 pipeline :
-name: defaultworkspace:
-  base: /php
-  path: src/github.com/humamalamin/Simple-CRUD-Laravel5.6:
-  - name: test
-    image: laravel-drone1
+  backend:
+    image: laradock/workspace:1.8-71
+    group: laravel
     commands:
-      - composer install
+      - php -v
+      - composer -V
       - cp .env.example .env
+      - composer install --prefer-dist
       - php artisan key:generate
-      - php artisan serve
-    image: laravel-drone1
-    commands:
-      - composer install
-      - cp .env.example .env
-      - php artisan key:generate
-      - php artisan serve
-    image: laravel-drone1
-    commands:
-      composer install
-      - cp .env.example .env
-      - php artisan key:generate
-      - php artisan serve
+      - php artisan migrate
+      - ./vendor/bin/phpunit
+services :
+  image: postgres:9.5.5
+    environment:
+      - POSTGRES_DB=homestead
+      - POSTGRES_USER=homestead
+      - POSTGRES_PASSWORD=secret
+      
