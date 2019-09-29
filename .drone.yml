@@ -1,4 +1,4 @@
-kind: pipeline
+pipeline :
 name: defaultworkspace:
   base: /php
   path: src/github.com/humamalamin/Simple-CRUD-Laravel5.6:
