@@ -1,15 +1,23 @@
-docker run \
-  --volume=/var/lib/drone:/data \
-  --env=DRONE_AGENTS_ENABLED=true \
-  --env=DRONE_GITHUB_SERVER=https://github.com \
-  --env=DRONE_GITHUB_CLIENT_ID=d16a9986e9aa240f3998 \
-  --env=DRONE_GITHUB_CLIENT_SECRET=7ac8b2f095447a449c40a78aa9dce23c3b8d7f74 \
-  --env=DRONE_RPC_SECRET=${DRONE_RPC_SECRET} \
-  --env=DRONE_SERVER_HOST=${DRONE_SERVER_HOST} \
-  --env=DRONE_SERVER_PROTO=${DRONE_SERVER_PROTO} \
-  --publish=80:80 \
-  --publish=443:443 \
-  --restart=always \
-  --detach=true \
-  --name=drone \
-  drone/drone:1
+kind: pipeline
+name: defaultworkspace:
+  base: /php
+  path: src/github.com/humamalamin/Simple-CRUD-Laravel5.6:
+  - name: test
+    image: laravel-drone1
+    commands:
+      - composer install
+      - cp .env.example .env
+      - php artisan key:generate
+      - php artisan serve
+    image: laravel-drone1
+    commands:
+      - composer install
+      - cp .env.example .env
+      - php artisan key:generate
+      - php artisan serve
+    image: laravel-drone1
+    commands:
+      composer install
+      - cp .env.example .env
+      - php artisan key:generate
+      - php artisan serve
