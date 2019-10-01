@@ -15,7 +15,7 @@ steps:
     - cp .env.example .env
     - php artisan key:generate
     # - php artisan migrate
-    - ./vendor/bin/phpunit
+    # - ./vendor/bin/phpunit
 
 # steps:
 #   - name: backend
