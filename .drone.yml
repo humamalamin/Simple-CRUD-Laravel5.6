@@ -7,11 +7,11 @@ steps:
   image: composer
   commands:
   - composer install
+  - composer -v
 
 - name: test
   image: php:7.1.3
   commands:
-    - composer -v
     - cp .env.example .env
     - php artisan key:generate
     # - php artisan migrate
