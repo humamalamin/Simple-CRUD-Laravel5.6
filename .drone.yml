@@ -9,6 +9,9 @@ steps:
     commands:
       # - php -v
       # - composer -V
+      - curl -s https://getcomposer.org/installer | php
+      - mv composer.phar /usr/local/bin/composer
+      - composer -v
       - cp .env.example .env
       - composer install
       - php artisan key:generate
