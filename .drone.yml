@@ -4,12 +4,14 @@ name: laravel-drone
 steps:
   - name: backend
     image: node
+    caches:
+      - composer
     commands:
       # - php -v
       # - composer -V
       - cp .env.example .env
-      - composer install --prefer-dist
+      - composer install
       - php artisan key:generate
-      - php artisan migrate
+      # - php artisan migrate
       - ./vendor/bin/phpunit
       
