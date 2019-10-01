@@ -5,8 +5,8 @@ steps:
   - name: backend
     image: node
     commands:
-      - php -v
-      - composer -V
+      # - php -v
+      # - composer -V
       - cp .env.example .env
       - composer install --prefer-dist
       - php artisan key:generate
